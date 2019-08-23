@@ -54,8 +54,44 @@ class CalculatorTests {
 			"1,  100, 101"
 	})
 	void add(int first, int second, int expectedResult) {
-		Calculator calculator = new Calculator();
-		assertEquals(expectedResult, calculator.add(first, second),
+		assertEquals(expectedResult, this.calculator.add(first, second),
 				() -> first + " + " + second + " should equal " + expectedResult);
+	}
+	
+	@ParameterizedTest(name = "{0} - {1} = {2}")
+	@CsvSource({
+		"1, 1, 0",
+		"2, 3, -1",
+		"4.5, 1, 3.5",
+		"'a', 'a', 0",
+	})
+	void sub(double first, double second, double expectedResult){
+		assertEquals(expectedResult, this.calculator.sub(first, second),
+				() -> first + " - " + second + " should equal " + expectedResult);
+	}
+	
+	
+	@ParameterizedTest(name = "{0} * {1} = {2}")
+	@CsvSource({
+		"1, 2, 2",
+		"-2, 1, -2",
+		"3.5, 2, 7",
+		"'a', 1, 61",
+	})
+	void mult(double first, double second, double expectedResult){
+		assertEquals(expectedResult, this.calculator.mult(first, second),
+				() -> first + " * " + second + " should equal " + expectedResult);
+	}
+	
+	@ParameterizedTest(name = "{0} / {1} = {2}")
+	@CsvSource({
+		"2, 2, 1",
+		"-4, 2, -2",
+		"4.5, 4.5, 1",
+		"'a', 'a', 1",
+	})
+	void div(double first, double second, double expectedResult){
+		assertEquals(expectedResult, this.calculator.div(first, second),
+				() -> first + " / " + second + " should equal " + expectedResult);
 	}
 }
